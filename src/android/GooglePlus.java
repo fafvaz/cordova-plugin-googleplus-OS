@@ -151,7 +151,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         // We're building the scopes on the Options object instead of the API Client
         // b/c of what was said under the "addScope" method here:
         // https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.Builder.html#public-methods
-        String scopes = clientOptions.optString(ARGUMENT_SCOPES, null);
+        String scopes = clientOptions.optString(ARGUMENT_SCOPES);
 
         if (!scopes.isEmpty()) {
             // We have a string of scopes passed in. Split by space and request
@@ -161,7 +161,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         }
 
         // Try to get web client id
-        String webClientId = clientOptions.optString(ARGUMENT_WEB_CLIENT_ID, null);
+        String webClientId = clientOptions.optString(ARGUMENT_WEB_CLIENT_ID);
 
         // if webClientId included, we'll request an idToken
         if (!webClientId.isEmpty()) {
@@ -174,7 +174,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         }
 
         // Try to get hosted domain
-        String hostedDomain = clientOptions.optString(ARGUMENT_HOSTED_DOMAIN, null);
+        String hostedDomain = clientOptions.optString(ARGUMENT_HOSTED_DOMAIN);
 
         // if hostedDomain included, we'll request a hosted domain account
         if (!hostedDomain.isEmpty()) {
