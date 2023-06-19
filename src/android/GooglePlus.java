@@ -317,26 +317,31 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
           return;
         }
 
-        JSONObject result = new JSONObject();
-        try {
-            JSONObject accessTokenBundle = getAuthToken(
-                    cordova.getActivity(), signInResult.getAccount(), true
-            );
-            result.put(FIELD_ACCESS_TOKEN, accessTokenBundle.get(FIELD_ACCESS_TOKEN));
-            result.put(FIELD_TOKEN_EXPIRES, accessTokenBundle.get(FIELD_TOKEN_EXPIRES));
-            result.put(FIELD_TOKEN_EXPIRES_IN, accessTokenBundle.get(FIELD_TOKEN_EXPIRES_IN));
-            result.put("email", signInResult.getEmail());
-            result.put("idToken", signInResult.getIdToken());
-            result.put("serverAuthCode", signInResult.getServerAuthCode());
-            result.put("userId", signInResult.getId());
-            result.put("displayName", signInResult.getDisplayName());
-            result.put("familyName", signInResult.getFamilyName());
-            result.put("givenName", signInResult.getGivenName());
-            result.put("imageUrl", signInResult.getPhotoUrl());
-            savedCallbackContext.success(result);
-        } catch (Exception e) {
-            savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
-        }
+        new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    JSONObject result = new JSONObject();
+                    try {
+                        JSONObject accessTokenBundle = getAuthToken(
+                                cordova.getActivity(), signInResult.getAccount(), true
+                        );
+                        result.put(FIELD_ACCESS_TOKEN, accessTokenBundle.get(FIELD_ACCESS_TOKEN));
+                        result.put(FIELD_TOKEN_EXPIRES, accessTokenBundle.get(FIELD_TOKEN_EXPIRES));
+                        result.put(FIELD_TOKEN_EXPIRES_IN, accessTokenBundle.get(FIELD_TOKEN_EXPIRES_IN));
+                        result.put("email", signInResult.getEmail());
+                        result.put("idToken", signInResult.getIdToken());
+                        result.put("serverAuthCode", signInResult.getServerAuthCode());
+                        result.put("userId", signInResult.getId());
+                        result.put("displayName", signInResult.getDisplayName());
+                        result.put("familyName", signInResult.getFamilyName());
+                        result.put("givenName", signInResult.getGivenName());
+                        result.put("imageUrl", signInResult.getPhotoUrl());
+                        savedCallbackContext.success(result);
+                    } catch (Exception e) {
+                        savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
+                    }
+                }
+            }.execute();
     }
 
     private void getSigningCertificateFingerprint() {
