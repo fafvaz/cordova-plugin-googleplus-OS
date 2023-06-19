@@ -340,6 +340,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                     } catch (Exception e) {
                         savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
                     }
+                    return null;
                 }
             }.execute();
     }
