@@ -33,7 +33,6 @@
     <preference name="PLAY_SERVICES_VERSION" default="20.1.0"/>
     <framework src="com.google.android.gms:play-services-auth:$PLAY_SERVICES_VERSION" />
     <framework src="com.google.android.gms:play-services-identity:$PLAY_SERVICES_VERSION" />
-    <framework src="src/android/GooglePlus.gradle" custom="true" type="gradleReference"/>
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="GooglePlus">
